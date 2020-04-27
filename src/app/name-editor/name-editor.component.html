@@ -1,0 +1,135 @@
+<form [formGroup]="nameForm" class="form-horizontal" (ngSubmit)="onSubmit()">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+
+        </div>
+        <div class="panel-body">
+
+
+            <div class="form-group" [ngClass]="{'has-error' : nameForm.get('title').errors && 
+            (nameForm.get('title').touched || nameForm.get('title').dirty)}">
+                <div class="col-sm-8">
+                    <input id="title" type="text" placeholder="Your Title*" formControlName="title" class="form-control"
+                        required>
+                    <span class="help-block" *ngIf="nameForm.get('title').errors && 
+                        (nameForm.get('title').touched || nameForm.get('title').dirty)">
+                        <span *ngIf="nameForm.controls['title'].hasError('required')">
+                            Title is required!
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group" [ngClass]="{'has-error' : nameForm.get('firstName').errors && 
+            (nameForm.get('firstName').touched || nameForm.get('firstName').dirty)}">
+                <div class="col-sm-8">
+                    <input id="firstName" type="text" placeholder="Your First Name*" formControlName="firstName"
+                        class="form-control" required>
+                    <span class="help-block" *ngIf="nameForm.get('firstName').errors && 
+                        (nameForm.get('firstName').touched || nameForm.get('firstName').dirty)">
+                        <span *ngIf="nameForm.controls['firstName'].hasError('required')">
+                            First name is required!
+                        </span>
+                        <span *ngIf="nameForm.controls['firstName'].hasError('pattern')">
+                            First name must contain letters and spaces only
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="form-group" [ngClass]="{'has-error' : nameForm.get('lastName').errors && 
+            (nameForm.get('lastName').touched || nameForm.get('lastName').dirty)}">
+                <div class="col-sm-8">
+                    <input id="lastName" type="text" placeholder="Your Last Name/Surname*" formControlName="lastName"
+                        class="form-control" required>
+                    <span class="help-block" *ngIf="nameForm.get('lastName').errors && 
+                        (nameForm.get('lastName').touched || nameForm.get('lastName').dirty)">
+                        <span *ngIf="nameForm.controls['lastName'].hasError('required')">
+                            Last name is required!
+                        </span>
+                        <span *ngIf="nameForm.controls['lastName'].hasError('pattern')">
+                            Last name must contain letters and spaces only
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-sm-8">
+                    <input placeholder="Your Email*" type="email" formControlName="address" class="form-control"
+                        required [ngClass]="nameForm.controls['address'].invalid ? 'is-invalid' : ''">
+                    <label class="text-danger" *ngIf="nameForm.controls['address'].hasError('required')">
+                        Email is Required!
+                    </label>
+                    <label class="text-danger" *ngIf="nameForm.controls['address'].hasError('address')">
+                        Enter a valid email address!
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-8">
+                    <input type="text" placeholder="Confirm Email*" formControlName="confirm" class="form-control"
+                        required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2" control-label for="birthDate">Date of Birth:</label>
+                <div class="col-sm-4">
+                    <input type="text" id="birthDate" formControlName="birthDate" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-8">
+                    <input type="tel" placeholder="Phone Number*" formControlName="phoneNum" class="form-control"
+                        required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-8">
+                    <input type="password" placeholder="Password*" formControlName="password" class="form-control"
+                        required>
+                    <label class="text-danger, col-sm-8" [ngClass]="nameForm.controls['password'].hasError('required') || nameForm.controls['password'].hasError('minLength')  ? 'text-danger' :
+                                'text-success'">Must be more than 8 characters!
+                    </label>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <button class="btn btn-primary" type="submit" [disabled]="!nameForm.valid">Submit</button>
+            </div>
+        </div>
+
+
+    </div>
+</form>
+
+<p>
+    Form Status: {{ nameForm.status }}
+</p>
+
+<table border="1">
+    <tr>
+        <th style="padding: 10px">FormGroup</th>
+        <th style="padding: 10px">FormControl (Title)</th>
+    </tr>
+    <tr>
+        <td style="padding: 10px">
+            touched: {{ nameForm.touched }}
+            <br /> dirty: {{nameForm.dirty}}
+            <br /> valid: {{ nameForm.valid }}
+            <br /> Form Value: {{ nameForm.value | json }}
+        </td>
+        <td style="padding: 10px">
+            touched: {{ nameForm.get('lastName').touched }}
+            <br /> dirty: {{nameForm.get('lastName').dirty}}
+            <br /> valid: {{ nameForm.get('lastName').valid }}
+            <br /> first name value: {{ nameForm.get('lastName').value | json }}
+        </td>
+    </tr>
+</table>
