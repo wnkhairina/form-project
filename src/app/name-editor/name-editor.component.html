@@ -1,102 +1,110 @@
+<div class="container">
 <form [formGroup]="nameForm" class="form-horizontal" (ngSubmit)="onSubmit()">
     <div class="panel panel-primary">
         <div class="panel-heading">
-
+            Registration Form
         </div>
         <div class="panel-body">
 
-
-            <div class="form-group" [ngClass]="{'has-error' : nameForm.get('title').errors && 
-            (nameForm.get('title').touched || nameForm.get('title').dirty)}">
+            
+            <div class="form-group" [ngClass]="{'has-error' : formErrors.title}">
                 <div class="col-sm-8">
-                    <input id="title" type="text" placeholder="Your Title*" formControlName="title" class="form-control"
-                        required>
-                    <span class="help-block" *ngIf="nameForm.get('title').errors && 
-                        (nameForm.get('title').touched || nameForm.get('title').dirty)">
-                        <span *ngIf="nameForm.controls['title'].hasError('required')">
-                            Title is required!
-                        </span>
+
+                    <select id="title" type="title" formControlName="title"  (blur)="logValidationErrors()" placeholder="Your Title*"  class="form-control">
+                        <option value="1">Mr.</option>
+                        <option value="2">Mrs.</option>
+                        <option value="3">Ms.</option>
+                        <option value="4">Miss.</option>
+                    </select>
+
+                
+                    <span class="help-block" *ngIf="formErrors.title">
+                        {{formErrors.title}}
                     </span>
                 </div>
             </div>
 
-            <div class="form-group" [ngClass]="{'has-error' : nameForm.get('firstName').errors && 
-            (nameForm.get('firstName').touched || nameForm.get('firstName').dirty)}">
+            <div class="form-group" [ngClass]="{'has-error' : formErrors.firstName}">
                 <div class="col-sm-8">
                     <input id="firstName" type="text" placeholder="Your First Name*" formControlName="firstName"
-                        class="form-control" required>
-                    <span class="help-block" *ngIf="nameForm.get('firstName').errors && 
-                        (nameForm.get('firstName').touched || nameForm.get('firstName').dirty)">
-                        <span *ngIf="nameForm.controls['firstName'].hasError('required')">
-                            First name is required!
-                        </span>
-                        <span *ngIf="nameForm.controls['firstName'].hasError('pattern')">
-                            First name must contain letters and spaces only
-                        </span>
+                        class="form-control" (blur)="logValidationErrors()" required>
+                    <span class="help-block" *ngIf="formErrors.firstName">
+                        {{formErrors.firstName}}
                     </span>
                 </div>
             </div>
 
 
-            <div class="form-group" [ngClass]="{'has-error' : nameForm.get('lastName').errors && 
-            (nameForm.get('lastName').touched || nameForm.get('lastName').dirty)}">
+            <div class="form-group" [ngClass]="{'has-error' : formErrors.lastName}">
                 <div class="col-sm-8">
                     <input id="lastName" type="text" placeholder="Your Last Name/Surname*" formControlName="lastName"
-                        class="form-control" required>
-                    <span class="help-block" *ngIf="nameForm.get('lastName').errors && 
-                        (nameForm.get('lastName').touched || nameForm.get('lastName').dirty)">
-                        <span *ngIf="nameForm.controls['lastName'].hasError('required')">
-                            Last name is required!
-                        </span>
-                        <span *ngIf="nameForm.controls['lastName'].hasError('pattern')">
-                            Last name must contain letters and spaces only
-                        </span>
+                        class="form-control" (blur)="logValidationErrors()" required>
+                    <span class="help-block" *ngIf="formErrors.lastName">
+                        {{formErrors.lastName}}
+
+                    </span>
+                </div>
+            </div>
+
+           
+            <div class="form-group" [ngClass]="{'has-error' : formErrors.address}">
+                <div class="col-sm-8">
+                    <input id="address" type="email" placeholder="Email Address*" formControlName="address"
+                        class="form-control" (blur)="logValidationErrors()" required>
+                    <span class="help-block" *ngIf="formErrors.address">
+                        {{formErrors.address}}
+
+                    </span>
+                </div>
+            </div>
+            
+            <div class="form-group" [ngClass]="{'has-error' : formErrors.confirm}">
+                <div class="col-sm-8">
+                    <input id="confirm" type="email" placeholder="Confirm Email*" formControlName="confirm"
+                        class="form-control" (blur)="logValidationErrors()" required>
+                    <span class="help-block" *ngIf="formErrors.confirm">
+                        {{formErrors.confirm}}
+
+                    </span>
+                </div>
+            </div>
+     
+
+
+            <div class="form-group" [ngClass]="{'has-error' : formErrors.birthDate}">
+                <div class="col-sm-8">
+                    <label class="col-sm-2" control-label for="birthDate">Date of Birth:</label>
+
+                    <input id="birthDate" type="text" bsDatepicker placeholder="Date of Birth*" formControlName="birthDate"
+                        class="form-control" (blur)="logValidationErrors()" required>
+                    <span class="help-block" *ngIf="formErrors.birthDate">
+                        {{formErrors.birthDate}}
+
                     </span>
                 </div>
             </div>
 
 
-            <div class="form-group">
+
+            <div class="form-group" [ngClass]="{'has-error' : formErrors.phoneNum}">
                 <div class="col-sm-8">
-                    <input placeholder="Your Email*" type="email" formControlName="address" class="form-control"
-                        required [ngClass]="nameForm.controls['address'].invalid ? 'is-invalid' : ''">
-                    <label class="text-danger" *ngIf="nameForm.controls['address'].hasError('required')">
-                        Email is Required!
-                    </label>
-                    <label class="text-danger" *ngIf="nameForm.controls['address'].hasError('address')">
-                        Enter a valid email address!
-                    </label>
+                    <input id="phoneNum" type="tel" placeholder="Phone Number (123-45678-901)*" formControlName="phoneNum"
+                        class="form-control" (blur)="logValidationErrors()" required>
+                    <span class="help-block" *ngIf="formErrors.phoneNum">
+                        {{formErrors.phoneNum}}
+
+                    </span>
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" [ngClass]="{'has-error' : formErrors.password}">
                 <div class="col-sm-8">
-                    <input type="text" placeholder="Confirm Email*" formControlName="confirm" class="form-control"
-                        required>
-                </div>
-            </div>
+                    <input id="password" type="text" placeholder="Password*" formControlName="password"
+                        class="form-control" (blur)="logValidationErrors()" required>
+                    <span class="help-block" *ngIf="formErrors.password">
+                        {{formErrors.password}}
 
-            <div class="form-group">
-                <label class="col-sm-2" control-label for="birthDate">Date of Birth:</label>
-                <div class="col-sm-4">
-                    <input type="text" id="birthDate" formControlName="birthDate" class="form-control" required>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-8">
-                    <input type="tel" placeholder="Phone Number*" formControlName="phoneNum" class="form-control"
-                        required>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-8">
-                    <input type="password" placeholder="Password*" formControlName="password" class="form-control"
-                        required>
-                    <label class="text-danger, col-sm-8" [ngClass]="nameForm.controls['password'].hasError('required') || nameForm.controls['password'].hasError('minLength')  ? 'text-danger' :
-                                'text-success'">Must be more than 8 characters!
-                    </label>
+                    </span>
                 </div>
             </div>
 
@@ -126,10 +134,13 @@
             <br /> Form Value: {{ nameForm.value | json }}
         </td>
         <td style="padding: 10px">
-            touched: {{ nameForm.get('lastName').touched }}
-            <br /> dirty: {{nameForm.get('lastName').dirty}}
-            <br /> valid: {{ nameForm.get('lastName').valid }}
-            <br /> first name value: {{ nameForm.get('lastName').value | json }}
+            touched: {{ nameForm.get('title').touched }}
+            <br /> dirty: {{nameForm.get('title').dirty}}
+            <br /> valid: {{ nameForm.get('title').valid }}
+            <br /> first name value: {{ nameForm.get('title').value | json }}
         </td>
     </tr>
+
+
 </table>
+</div>

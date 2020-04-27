@@ -15,4 +15,14 @@ export class CustomValidators {
       return valid ? null : error;
     }
   }
+
+  static emailMatchValidator(control: AbstractControl) {
+    const email: string = control.get('address').value; // get password from our password form control
+    const confirmEmail: string = control.get('confirm').value; // get password from our confirmPassword form control
+    // compare is the password math
+    if (email !== confirmEmail) {
+      // if they don't match, set an error in our confirmPassword form control
+      control.get('confirm').setErrors({ NoEmailMatch: true });
+    }
+  }
 }

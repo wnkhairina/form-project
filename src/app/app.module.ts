@@ -5,7 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NameEditorComponent } from './name-editor/name-editor.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MaterialModule } from 'src/app/material.module';
+import {BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MaterialModule,
+    BsDatepickerModule.forRoot()
     
     
   ],
